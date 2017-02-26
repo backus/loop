@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Alias $@ for readability
+arguments=($@)
+
+# Write the arguments given to a string since $@ is an array
+# See https://github.com/koalaman/shellcheck/wiki/SC2145
+repeated_command="$*"
+
+# String we will update with file paths found in the command
+files_to_watch=''
+
+# Iterate over arguments to find files, appending to $files_to_watch
+for argument in "${arguments[@]}"
+do
+  if [ -f "$argument" ]; then
+    files_to_watch="$files_to_watch $argument"
+  fi
+done
+
+# Run filewatcher with the found files and the given command
+filewatcher "$files_to_watch" "$repeated_command"
