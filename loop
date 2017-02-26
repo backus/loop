@@ -13,7 +13,7 @@ files_to_watch=''
 # Iterate over arguments to find files, appending to $files_to_watch
 for argument in "${arguments[@]}"
 do
-  if [ -f "$argument" ]; then
+  if [ -e "$argument" ]; then
     files_to_watch="$files_to_watch $argument"
   fi
 done
